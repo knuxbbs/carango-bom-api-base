@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  db:
+    image: postgres:13.4
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: 'carangobom'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: '1234'
+    ports:
+      - '5432:5432'
+    expose:
+      - '5432'
+    volumes:
+      - my-db:/var/lib/postgres
+      
+volumes:
+  my-db:
