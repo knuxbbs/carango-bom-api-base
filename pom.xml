@@ -117,7 +117,6 @@
 					</execution>
 				</executions>
 			</plugin>
-<<<<<<< HEAD
 			<plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
@@ -131,9 +130,7 @@
 					</execution>
 				</executions>
 			</plugin>
-=======
->>>>>>> b63245e34251092b5ed7507c97eb04fcc6b94d52
-		</plugins>
+			</plugins>
 	</build>
 
 </project>
