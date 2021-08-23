@@ -25,7 +25,7 @@
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
 		<sonar.language>java</sonar.language>
-	</properties>
+		</properties>
 
 	<dependencies>
 		<dependency>
@@ -117,6 +117,7 @@
 					</execution>
 				</executions>
 			</plugin>
+<<<<<<< HEAD
 			<plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
@@ -130,6 +131,8 @@
 					</execution>
 				</executions>
 			</plugin>
+=======
+>>>>>>> b63245e34251092b5ed7507c97eb04fcc6b94d52
 		</plugins>
 	</build>
 
