@@ -1,101 +1,82 @@
 package br.com.caelum.carangobom.marca;
 
-import br.com.caelum.carangobom.validacao.ErroDeParametroOutputDto;
-import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
+import java.net.URI;
+import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.validation.Valid;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-@Controller
+@RestController
+@RequestMapping("/marcas")
 public class MarcaController {
 
-    private MarcaRepository mr;
+    private MarcaFacade marcaFacade;
 
     @Autowired
-    public MarcaController(MarcaRepository mr) {
-        this.mr = mr;
+    public MarcaController(MarcaFacade marcaFacade) {
+        this.marcaFacade = marcaFacade;
     }
 
-    @GetMapping("/marcas")
-    @ResponseBody
-    @Transactional
-    public List<Marca> lista() {
-        return mr.findAllByOrderByNome();
+    @GetMapping
+    public List<Marca> listarOrdenadoPorNome() {
+        return marcaFacade.listarOrdenadoPorNome();
     }
 
-    @GetMapping("/marcas/{id}")
-    @ResponseBody
+    @GetMapping("/{id}")
+    public ResponseEntity<Marca> recuperarPorId(@PathVariable Long id) {
+        var marca = marcaFacade.recuperar(id);
+
+        return ResponseEntity.of(marca);
+    }
+
+    @PostMapping
     @Transactional
-    public ResponseEntity<Marca> id(@PathVariable Long id) {
-        Optional<Marca> m1 = mr.findById(id);
-        if (m1.isPresent()) {
-            return ResponseEntity.ok(m1.get());
-        } else {
+    public ResponseEntity<Marca> cadastrar(@Valid @RequestBody Marca novaMarca,
+            UriComponentsBuilder uriBuilder) {
+        try {
+            var marcaCadastrada = marcaFacade.cadastrar(novaMarca);
+            URI h = uriBuilder.path("/marcas/{id}").buildAndExpand(marcaCadastrada.getId()).toUri();
+            return ResponseEntity.created(h).body(marcaCadastrada);
+
+        } catch (MarcaNaoEncontradaException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Marca> alterar(@PathVariable Long id,
+            @Valid @RequestBody Marca dadosAltercaoMarca) {
+
+        try {
+            var marcaAlterada = marcaFacade.alterar(id, dadosAltercaoMarca);
+            return ResponseEntity.ok(marcaAlterada);
+        } catch (MarcaNaoEncontradaException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @PostMapping("/marcas")
-    @ResponseBody
+    @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<Marca> cadastra(@Valid @RequestBody Marca m1, UriComponentsBuilder uriBuilder) {
-        Marca m2 = mr.save(m1);
-        URI h = uriBuilder.path("/marcas/{id}").buildAndExpand(m1.getId()).toUri();
-        return ResponseEntity.created(h).body(m2);
-    }
+    public ResponseEntity<Marca> deletar(@PathVariable Long id) {
+        try {
+            var marca = marcaFacade.deletar(id);
 
-    @PutMapping("/marcas/{id}")
-    @ResponseBody
-    @Transactional
-    public ResponseEntity<Marca> altera(@PathVariable Long id, @Valid @RequestBody Marca m1) {
-        Optional<Marca> m2 = mr.findById(id);
-        if (m2.isPresent()) {
-            Marca m3 = m2.get();
-            m3.setNome(m1.getNome());
-            return ResponseEntity.ok(m3);
-        } else {
+            return ResponseEntity.ok(marca);
+
+        } catch (MarcaNaoEncontradaException e) {
             return ResponseEntity.notFound().build();
         }
-    }
 
-    @DeleteMapping("/marcas/{id}")
-    @ResponseBody
-    @Transactional
-    public ResponseEntity<Marca> deleta(@PathVariable Long id) {
-        Optional<Marca> m1 = mr.findById(id);
-        if (m1.isPresent()) {
-            Marca m2 = m1.get();
-            mr.delete(m2);
-            return ResponseEntity.ok(m2);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseBody
-    public ListaDeErrosOutputDto validacao(MethodArgumentNotValidException excecao) {
-        List<ErroDeParametroOutputDto> l = new ArrayList<>();
-        excecao.getBindingResult().getFieldErrors().forEach(e -> {
-            ErroDeParametroOutputDto d = new ErroDeParametroOutputDto();
-            d.setParametro(e.getField());
-            d.setMensagem(e.getDefaultMessage());
-            l.add(d);
-        });
-        ListaDeErrosOutputDto l2 = new ListaDeErrosOutputDto();
-        l2.setErros(l);
-        return l2;
     }
 }
