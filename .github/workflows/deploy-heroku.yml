@@ -17,7 +17,7 @@ jobs:
           java-version: 11
           
       - name: Tests and build jar
-        run: mvn test    
+        run: mvn package    
     
       - name: Build, Push and Release a Docker container to Heroku. 
         uses: gonuit/heroku-docker-deploy@v1.3.3
