@@ -42,16 +42,12 @@ public class MarcaController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<?> cadastrar(@Valid @RequestBody Marca novaMarca,
+    public ResponseEntity<Marca> cadastrar(@Valid @RequestBody Marca novaMarca,
             UriComponentsBuilder uriBuilder) {
-        try {
-            var marcaCadastrada = marcaFacade.cadastrar(novaMarca);
-            URI h = uriBuilder.path("/marcas/{id}").buildAndExpand(marcaCadastrada.getId()).toUri();
-            return ResponseEntity.created(h).body(marcaCadastrada);
 
-        } catch (MarcaCadastradaAnteriormenteException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        var marcaCadastrada = marcaFacade.cadastrar(novaMarca);
+        URI h = uriBuilder.path("/marcas/{id}").buildAndExpand(marcaCadastrada.getId()).toUri();
+        return ResponseEntity.created(h).body(marcaCadastrada);
     }
 
     @PutMapping("/{id}")
