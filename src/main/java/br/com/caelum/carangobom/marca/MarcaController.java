@@ -41,7 +41,7 @@ public class MarcaController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<Marca> cadastrar(@Valid @RequestBody Marca novaMarca,
+    public ResponseEntity<?> cadastrar(@Valid @RequestBody Marca novaMarca,
             UriComponentsBuilder uriBuilder) {
         try {
             var marcaCadastrada = marcaFacade.cadastrar(novaMarca);
@@ -49,7 +49,7 @@ public class MarcaController {
             return ResponseEntity.created(h).body(marcaCadastrada);
 
         } catch (MarcaNaoEncontradaException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
