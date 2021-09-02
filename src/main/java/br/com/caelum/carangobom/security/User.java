@@ -49,7 +49,7 @@ public class User implements UserDetails {
   }
 
   @ManyToMany(fetch = FetchType.EAGER)
-  private Set<Role> roles = new HashSet<Role>();
+  private Set<Role> roles = new HashSet<>();
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
