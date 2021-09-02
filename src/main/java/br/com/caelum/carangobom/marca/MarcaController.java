@@ -20,63 +20,63 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("/marcas")
 public class MarcaController {
 
-    private MarcaFacade marcaFacade;
+  private MarcaFacade marcaFacade;
 
-    @Autowired
-    public MarcaController(MarcaFacade marcaFacade) {
-        this.marcaFacade = marcaFacade;
+  @Autowired
+  public MarcaController(MarcaFacade marcaFacade) {
+    this.marcaFacade = marcaFacade;
+  }
+
+  @GetMapping
+  public List<Marca> listarOrdenadoPorNome() {
+    return marcaFacade.listarOrdenadoPorNome();
+  }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<Marca> recuperarPorId(@PathVariable Long id) {
+    var marca = marcaFacade.recuperar(id);
+
+    return ResponseEntity.of(marca);
+  }
+
+  @PostMapping
+  @Transactional
+  public ResponseEntity<Marca> cadastrar(@Valid @RequestBody Marca novaMarca,
+      UriComponentsBuilder uriBuilder) {
+    try {
+      var marcaCadastrada = marcaFacade.cadastrar(novaMarca);
+      URI h = uriBuilder.path("/marcas/{id}").buildAndExpand(marcaCadastrada.getId()).toUri();
+      return ResponseEntity.created(h).body(marcaCadastrada);
+
+    } catch (MarcaCadastradaAnteriormenteException e) {
+      return ResponseEntity.badRequest().build();
+    }
+  }
+
+  @PutMapping("/{id}")
+  @Transactional
+  public ResponseEntity<Marca> alterar(@PathVariable Long id,
+      @Valid @RequestBody Marca dadosAltercaoMarca) {
+
+    try {
+      var marcaAlterada = marcaFacade.alterar(id, dadosAltercaoMarca);
+      return ResponseEntity.ok(marcaAlterada);
+    } catch (MarcaNaoEncontradaException e) {
+      return ResponseEntity.notFound().build();
+    }
+  }
+
+  @DeleteMapping("/{id}")
+  @Transactional
+  public ResponseEntity<Marca> deletar(@PathVariable Long id) {
+    try {
+      var marca = marcaFacade.deletar(id);
+
+      return ResponseEntity.ok(marca);
+
+    } catch (MarcaNaoEncontradaException e) {
+      return ResponseEntity.notFound().build();
     }
 
-    @GetMapping
-    public List<Marca> listarOrdenadoPorNome() {
-        return marcaFacade.listarOrdenadoPorNome();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Marca> recuperarPorId(@PathVariable Long id) {
-        var marca = marcaFacade.recuperar(id);
-
-        return ResponseEntity.of(marca);
-    }
-
-    @PostMapping
-    @Transactional
-    public ResponseEntity<Marca> cadastrar(@Valid @RequestBody Marca novaMarca,
-            UriComponentsBuilder uriBuilder) {
-        try {
-            var marcaCadastrada = marcaFacade.cadastrar(novaMarca);
-            URI h = uriBuilder.path("/marcas/{id}").buildAndExpand(marcaCadastrada.getId()).toUri();
-            return ResponseEntity.created(h).body(marcaCadastrada);
-
-        } catch (MarcaNaoEncontradaException e) {
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-    @PutMapping("/{id}")
-    @Transactional
-    public ResponseEntity<Marca> alterar(@PathVariable Long id,
-            @Valid @RequestBody Marca dadosAltercaoMarca) {
-
-        try {
-            var marcaAlterada = marcaFacade.alterar(id, dadosAltercaoMarca);
-            return ResponseEntity.ok(marcaAlterada);
-        } catch (MarcaNaoEncontradaException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    @Transactional
-    public ResponseEntity<Marca> deletar(@PathVariable Long id) {
-        try {
-            var marca = marcaFacade.deletar(id);
-
-            return ResponseEntity.ok(marca);
-
-        } catch (MarcaNaoEncontradaException e) {
-            return ResponseEntity.notFound().build();
-        }
-
-    }
+  }
 }
