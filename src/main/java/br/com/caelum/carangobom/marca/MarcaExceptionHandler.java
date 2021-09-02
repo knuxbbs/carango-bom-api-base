@@ -3,8 +3,10 @@ package br.com.caelum.carangobom.marca;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import br.com.caelum.carangobom.erro.Erro;
 
+@RestControllerAdvice
 public class MarcaExceptionHandler {
 
     @ExceptionHandler(MarcaNaoEncontradaException.class)
