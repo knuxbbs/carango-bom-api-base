@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Autowired
-  private AuthenticationService authenticationService;
+  private UserService userService;
 
   @Autowired
   private JwtRequestFilter jwtFilter;
@@ -31,12 +31,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(authenticationService).passwordEncoder(new BCryptPasswordEncoder());
+    auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
   }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests().antMatchers(HttpMethod.GET, "/veiculos/**").permitAll()
+    http.authorizeRequests().antMatchers("/auth/login").permitAll()
+        .antMatchers(HttpMethod.GET, "/veiculos/**").permitAll()
         .antMatchers(HttpMethod.GET, "/marcas/**").permitAll().anyRequest().authenticated().and()
         .csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and().addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class);
