@@ -42,7 +42,7 @@ public class MarcaController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<Object> cadastrar(@Valid @RequestBody Marca novaMarca,
+    public ResponseEntity<?> cadastrar(@Valid @RequestBody Marca novaMarca,
             UriComponentsBuilder uriBuilder) {
         try {
             var marcaCadastrada = marcaFacade.cadastrar(novaMarca);
