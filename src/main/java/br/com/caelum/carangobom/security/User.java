@@ -1,8 +1,8 @@
 package br.com.caelum.carangobom.security;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -48,9 +48,8 @@ public class User implements UserDetails {
     this.password = password;
   }
 
-  // TODO: Converter para HashSet
   @ManyToMany(fetch = FetchType.EAGER)
-  private List<Role> roles = new ArrayList<>();
+  private Set<Role> roles = new HashSet<Role>();
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -64,7 +63,7 @@ public class User implements UserDetails {
 
   @Override
   public String getUsername() {
-    return email;
+    return getEmail();
   }
 
   @Override

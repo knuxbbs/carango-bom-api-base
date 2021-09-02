@@ -39,8 +39,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     http.authorizeRequests().antMatchers("/auth/login").permitAll()
         .antMatchers(HttpMethod.GET, "/veiculos/**").permitAll()
         .antMatchers(HttpMethod.GET, "/marcas/**").permitAll().anyRequest().authenticated().and()
-        .csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and().addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+        .addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class);
   }
 
 }
