@@ -1,9 +1,6 @@
 package br.com.caelum.carangobom.marca;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
@@ -96,14 +93,6 @@ class MarcaControllerTest {
     }
 
     @Test
-    void naoDeveAlterarMarcaInexistente() {
-        when(marcaFacade.alterar(anyLong(), any())).thenThrow(MarcaNaoEncontradaException.class);
-
-        ResponseEntity<Marca> resposta = marcaController.alterar(1L, new Marca(1L, "NOVA Audi"));
-        assertEquals(HttpStatus.NOT_FOUND, resposta.getStatusCode());
-    }
-
-    @Test
     void deveDeletarMarcaExistente() {
         Marca audi = new Marca(1l, "Audi");
 
@@ -113,15 +102,4 @@ class MarcaControllerTest {
         assertEquals(HttpStatus.OK, resposta.getStatusCode());
         verify(marcaFacade).deletar(1L);
     }
-
-    @Test
-    void naoDeveDeletarMarcaInexistente() {
-        when(marcaFacade.deletar(anyLong())).thenThrow(MarcaNaoEncontradaException.class);
-
-        ResponseEntity<?> resposta = marcaController.deletar(1L);
-        assertEquals(HttpStatus.NOT_FOUND, resposta.getStatusCode());
-
-        verify(marcaRepository, never()).deleteById(any());
-    }
-
 }
