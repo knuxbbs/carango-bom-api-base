@@ -11,11 +11,11 @@ public class VeiculoView {
   private MarcaView marca;
 
   public VeiculoView(Veiculo veiculo) {
-    id = veiculo.getId();
-    modelo = veiculo.getModelo();
-    ano = veiculo.getAno();
-    valor = veiculo.getValor();
-    marca = new MarcaView(veiculo.getMarca());
+    this.id = veiculo.getId();
+    this.modelo = veiculo.getModelo();
+    this.ano = veiculo.getAno();
+    this.valor = veiculo.getValor();
+    this.marca = new MarcaView(veiculo.getMarca());
   }
 
   public Long getId() {

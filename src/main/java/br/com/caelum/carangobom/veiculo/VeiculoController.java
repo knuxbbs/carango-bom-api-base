@@ -62,6 +62,6 @@ public class VeiculoController {
   public ResponseEntity<Object> deletar(@PathVariable Long id) {
     veiculoFacade.deletar(id);
 
-    return ResponseEntity.ok().build();
+    return ResponseEntity.ok(new Object());
   }
 }
