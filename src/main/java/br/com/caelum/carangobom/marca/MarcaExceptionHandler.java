@@ -9,6 +9,13 @@ public class MarcaExceptionHandler {
 
     @ExceptionHandler(MarcaNaoEncontradaException.class)
     public ResponseEntity<Erro> handleMarcaNaoEncontradaExcpecption(MarcaNaoEncontradaException e) {
+        Erro error = new Erro(HttpStatus.NOT_FOUND, e.getLocalizedMessage());
+        return new ResponseEntity<>(error, error.getHttpStatus());
+    }
+
+    @ExceptionHandler(MarcaCadastradaAnteriormenteException.class)
+    public ResponseEntity<Erro> handleMarcaNaoEncontradaExcpecption(
+            MarcaCadastradaAnteriormenteException e) {
         Erro error = new Erro(HttpStatus.BAD_REQUEST, e.getLocalizedMessage());
         return new ResponseEntity<>(error, error.getHttpStatus());
     }
