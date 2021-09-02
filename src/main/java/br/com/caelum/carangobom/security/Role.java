@@ -1,13 +1,15 @@
-package br.com.caelum.carangobom.seguranca;
+package br.com.caelum.carangobom.security;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
-public class AppRole implements GrantedAuthority {
+@Table(name = "AppRole")
+public class Role implements GrantedAuthority {
 
   private static final long serialVersionUID = 8587117350135759105L;
 

@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.seguranca;
+package br.com.caelum.carangobom.security;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,11 +9,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class AppUser implements UserDetails {
+@Table(name = "AppUser")
+public class User implements UserDetails {
 
   private static final long serialVersionUID = -7496762905375699273L;
 
@@ -46,7 +48,7 @@ public class AppUser implements UserDetails {
 
   // TODO: Converter para HashSet
   @ManyToMany(fetch = FetchType.EAGER)
-  private List<AppRole> roles = new ArrayList<>();
+  private List<Role> roles = new ArrayList<>();
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
