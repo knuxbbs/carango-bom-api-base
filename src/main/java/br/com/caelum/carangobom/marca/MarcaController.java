@@ -39,7 +39,6 @@ public class MarcaController {
         return ResponseEntity.of(marca);
     }
 
-
     @PostMapping
     @Transactional
     public ResponseEntity<Marca> cadastrar(@Valid @RequestBody Marca novaMarca,
