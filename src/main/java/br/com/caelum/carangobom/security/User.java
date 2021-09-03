@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -25,8 +26,16 @@ public class User implements UserDetails {
   private Long id;
 
   @Column(unique = true)
+  @Email
   private String email;
   private String password;
+
+  protected User() {}
+
+  public User(String email, String password) {
+    this.email = email;
+    this.password = password;
+  }
 
   public Long getId() {
     return id;
