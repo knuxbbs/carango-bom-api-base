@@ -8,8 +8,8 @@ public class Erro {
   private String message;
 
   public Erro(HttpStatus httpStatus, String message) {
-    this.httpStatus = httpStatus;
-    this.message = message;
+    setHttpStatus(httpStatus);
+    setMessage(message);
   }
 
   public HttpStatus getHttpStatus() {
