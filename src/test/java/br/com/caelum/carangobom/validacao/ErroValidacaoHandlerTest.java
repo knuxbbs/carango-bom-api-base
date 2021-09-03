@@ -35,7 +35,15 @@ class ErroValidacaoHandlerTest {
     var handler = new ErroValidacaoHandler();
     var listaDto = handler.validacao(exception);
 
+    List<ErroDeParametroOutputDto> dtos = listaDto.getErros();
+
     assertEquals(2, listaDto.getQuantidadeDeErros());
+
+    assertEquals("nome", dtos.get(0).getParametro());
+    assertEquals("Deve ser preenchido.", dtos.get(0).getMensagem());
+
+    assertEquals("nome", dtos.get(1).getParametro());
+    assertEquals("Deve ter 2 ou mais caracteres.", dtos.get(1).getMensagem());
   }
 
 }
