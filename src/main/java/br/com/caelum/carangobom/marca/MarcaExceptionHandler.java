@@ -9,17 +9,16 @@ import br.com.caelum.carangobom.erro.Erro;
 @RestControllerAdvice
 public class MarcaExceptionHandler {
 
-    @ExceptionHandler(MarcaNaoEncontradaException.class)
-    public ResponseEntity<Erro> handleMarcaNaoEncontradaExcpecption(MarcaNaoEncontradaException e) {
-        Erro error = new Erro(HttpStatus.NOT_FOUND, e.getLocalizedMessage());
-        return new ResponseEntity<>(error, error.getHttpStatus());
-    }
+  @ExceptionHandler(MarcaNaoEncontradaException.class)
+  public ResponseEntity<Erro> handle(MarcaNaoEncontradaException e) {
+    Erro error = new Erro(HttpStatus.NOT_FOUND, e.getLocalizedMessage());
+    return new ResponseEntity<>(error, error.getHttpStatus());
+  }
 
-    @ExceptionHandler(MarcaCadastradaAnteriormenteException.class)
-    public ResponseEntity<Erro> handleMarcaNaoEncontradaExcpecption(
-            MarcaCadastradaAnteriormenteException e) {
-        Erro error = new Erro(HttpStatus.BAD_REQUEST, e.getLocalizedMessage());
-        return new ResponseEntity<>(error, error.getHttpStatus());
-    }
+  @ExceptionHandler(MarcaCadastradaAnteriormenteException.class)
+  public ResponseEntity<Erro> handle(MarcaCadastradaAnteriormenteException e) {
+    Erro error = new Erro(HttpStatus.BAD_REQUEST, e.getLocalizedMessage());
+    return new ResponseEntity<>(error, error.getHttpStatus());
+  }
 
 }
