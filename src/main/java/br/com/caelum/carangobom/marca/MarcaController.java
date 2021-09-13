@@ -56,7 +56,6 @@ public class MarcaController {
 
         var marcaAlterada = marcaFacade.alterar(id, dadosAltercaoMarca);
         return ResponseEntity.ok(marcaAlterada);
-
     }
 
     @DeleteMapping("/{id}")
