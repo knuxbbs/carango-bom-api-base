@@ -1,0 +1,1 @@
+INSERT INTO app_user(email, password) VALUES('admin@email.com', '$2a$10$3ujUJZPR5MnvTUffYyjGwOZaOoDX88uQrrw3lzOp1KIDW7OowmsSK') ON CONFLICT(email) DO NOTHING;
