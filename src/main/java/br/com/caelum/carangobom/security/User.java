@@ -30,6 +30,9 @@ public class User implements UserDetails {
   private String email;
   private String password;
 
+  @ManyToMany(fetch = FetchType.EAGER)
+  private Set<Role> roles = new HashSet<>();
+
   protected User() {}
 
   public User(String email, String password) {
@@ -56,9 +59,6 @@ public class User implements UserDetails {
   public void setPassword(String password) {
     this.password = password;
   }
-
-  @ManyToMany(fetch = FetchType.EAGER)
-  private Set<Role> roles = new HashSet<>();
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
