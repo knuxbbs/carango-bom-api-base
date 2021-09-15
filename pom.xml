@@ -12,7 +12,7 @@
 	<groupId>br.com.caelum</groupId>
 	<artifactId>carango-bom-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Carango Bom</name>
+	<name>Carango Bom API</name>
 	<description>API de gerenciamento de vendas de veículos</description>
 
 	<properties>
