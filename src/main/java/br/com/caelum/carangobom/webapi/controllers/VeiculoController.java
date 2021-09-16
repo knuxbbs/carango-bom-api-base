@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.veiculo;
+package br.com.caelum.carangobom.webapi.controllers;
 
 import java.util.List;
 import javax.transaction.Transactional;
@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+import br.com.caelum.carangobom.veiculo.VeiculoFacade;
+import br.com.caelum.carangobom.veiculo.VeiculoForm;
+import br.com.caelum.carangobom.veiculo.VeiculoView;
 
 @RestController
 @RequestMapping("/veiculos")

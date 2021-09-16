@@ -14,6 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.caelum.carangobom.Marca;
 import br.com.caelum.carangobom.Veiculo;
 import br.com.caelum.carangobom.marca.MarcaRepository;
+import br.com.caelum.carangobom.webapi.controllers.VeiculoController;
 
 class VeiculoControllerTest {
 

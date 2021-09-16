@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.security;
+package br.com.caelum.carangobom.webapi.controllers;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import br.com.caelum.carangobom.security.JwtManager;
+import br.com.caelum.carangobom.security.LoginForm;
+import br.com.caelum.carangobom.security.LoginView;
+import br.com.caelum.carangobom.security.User;
 
 @RestController
 @RequestMapping("/auth")

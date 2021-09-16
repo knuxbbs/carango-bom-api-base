@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.marca;
+package br.com.caelum.carangobom.webapi.controllers;
 
 import java.net.URI;
 import java.util.List;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import br.com.caelum.carangobom.Marca;
+import br.com.caelum.carangobom.marca.MarcaFacade;
 
 @RestController
 @RequestMapping("/marcas")

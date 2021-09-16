@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 import br.com.caelum.carangobom.Marca;
+import br.com.caelum.carangobom.webapi.controllers.MarcaController;
 
 class MarcaControllerTest {
 
