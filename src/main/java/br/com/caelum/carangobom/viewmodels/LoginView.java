@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.security;
+package br.com.caelum.carangobom.viewmodels;
 
 public class LoginView {
 

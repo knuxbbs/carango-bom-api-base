@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.validacao;
+package br.com.caelum.carangobom.viewmodels;
 
 import java.util.List;
 

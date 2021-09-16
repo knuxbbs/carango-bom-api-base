@@ -11,6 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import br.com.caelum.carangobom.Marca;
+import br.com.caelum.carangobom.viewmodels.ErroDeParametroOutputDto;
+import br.com.caelum.carangobom.webapi.ErroValidacaoHandler;
 
 class ErroValidacaoHandlerTest {
 

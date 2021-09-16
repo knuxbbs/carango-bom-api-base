@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.validacao;
+package br.com.caelum.carangobom.webapi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import br.com.caelum.carangobom.viewmodels.ErroDeParametroOutputDto;
+import br.com.caelum.carangobom.viewmodels.ListaDeErrosOutputDto;
 
 @RestControllerAdvice
 public class ErroValidacaoHandler {

@@ -14,7 +14,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import br.com.caelum.carangobom.Marca;
 import br.com.caelum.carangobom.Veiculo;
-import br.com.caelum.carangobom.marca.MarcaRepository;
+import br.com.caelum.carangobom.repositories.MarcaRepository;
+import br.com.caelum.carangobom.repositories.VeiculoRepository;
+import br.com.caelum.carangobom.services.VeiculoFacade;
+import br.com.caelum.carangobom.viewmodels.VeiculoForm;
 
 class VeiculoFacadeTest {
 

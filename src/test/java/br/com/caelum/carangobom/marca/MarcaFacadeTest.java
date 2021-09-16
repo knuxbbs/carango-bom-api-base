@@ -10,6 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import br.com.caelum.carangobom.Marca;
+import br.com.caelum.carangobom.MarcaCadastradaAnteriormenteException;
+import br.com.caelum.carangobom.MarcaNaoEncontradaException;
+import br.com.caelum.carangobom.repositories.MarcaRepository;
+import br.com.caelum.carangobom.services.MarcaFacade;
 
 class MarcaFacadeTest {
 

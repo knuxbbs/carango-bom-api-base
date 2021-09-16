@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.security;
+package br.com.caelum.carangobom.webapi.security;
 
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;

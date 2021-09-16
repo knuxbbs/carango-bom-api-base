@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.caelum.carangobom.security.JwtManager;
-import br.com.caelum.carangobom.security.LoginForm;
-import br.com.caelum.carangobom.security.LoginView;
-import br.com.caelum.carangobom.security.User;
+import br.com.caelum.carangobom.viewmodels.LoginForm;
+import br.com.caelum.carangobom.viewmodels.LoginView;
+import br.com.caelum.carangobom.webapi.security.JwtManager;
+import br.com.caelum.carangobom.webapi.security.User;
 
 @RestController
 @RequestMapping("/auth")

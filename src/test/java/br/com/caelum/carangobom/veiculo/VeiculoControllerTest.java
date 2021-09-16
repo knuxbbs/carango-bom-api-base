@@ -13,7 +13,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.util.UriComponentsBuilder;
 import br.com.caelum.carangobom.Marca;
 import br.com.caelum.carangobom.Veiculo;
-import br.com.caelum.carangobom.marca.MarcaRepository;
+import br.com.caelum.carangobom.repositories.MarcaRepository;
+import br.com.caelum.carangobom.repositories.VeiculoRepository;
+import br.com.caelum.carangobom.services.VeiculoFacade;
+import br.com.caelum.carangobom.viewmodels.VeiculoForm;
+import br.com.caelum.carangobom.viewmodels.VeiculoView;
 import br.com.caelum.carangobom.webapi.controllers.VeiculoController;
 
 class VeiculoControllerTest {

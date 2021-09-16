@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.security;
+package br.com.caelum.carangobom.webapi.security;
 
 import java.io.IOException;
 import javax.servlet.FilterChain;

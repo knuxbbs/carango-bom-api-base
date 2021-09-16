@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.security;
+package br.com.caelum.carangobom.webapi.security;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -42,10 +42,6 @@ public class User implements UserDetails {
 
   public Long getId() {
     return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
   }
 
   public String getEmail() {

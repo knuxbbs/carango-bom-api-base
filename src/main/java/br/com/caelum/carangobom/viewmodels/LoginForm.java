@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.security;
+package br.com.caelum.carangobom.viewmodels;
 
 import javax.validation.constraints.NotBlank;
 

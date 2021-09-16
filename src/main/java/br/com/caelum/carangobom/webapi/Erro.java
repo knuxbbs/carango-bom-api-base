@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.erro;
+package br.com.caelum.carangobom.webapi;
 
 import org.springframework.http.HttpStatus;
 

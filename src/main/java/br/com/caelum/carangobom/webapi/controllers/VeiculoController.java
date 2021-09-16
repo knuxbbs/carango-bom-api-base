@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
-import br.com.caelum.carangobom.veiculo.VeiculoFacade;
-import br.com.caelum.carangobom.veiculo.VeiculoForm;
-import br.com.caelum.carangobom.veiculo.VeiculoView;
+import br.com.caelum.carangobom.services.VeiculoFacade;
+import br.com.caelum.carangobom.viewmodels.VeiculoForm;
+import br.com.caelum.carangobom.viewmodels.VeiculoView;
 
 @RestController
 @RequestMapping("/veiculos")

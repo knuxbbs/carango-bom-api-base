@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.marca;
+package br.com.caelum.carangobom.viewmodels;
 
 import br.com.caelum.carangobom.Marca;
 

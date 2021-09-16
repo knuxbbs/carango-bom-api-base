@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.veiculo;
+package br.com.caelum.carangobom.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,9 +6,12 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import br.com.caelum.carangobom.MarcaNaoEncontradaException;
 import br.com.caelum.carangobom.Veiculo;
-import br.com.caelum.carangobom.marca.MarcaNaoEncontradaException;
-import br.com.caelum.carangobom.marca.MarcaRepository;
+import br.com.caelum.carangobom.repositories.MarcaRepository;
+import br.com.caelum.carangobom.repositories.VeiculoRepository;
+import br.com.caelum.carangobom.viewmodels.VeiculoForm;
+import br.com.caelum.carangobom.viewmodels.VeiculoView;
 
 @Service
 public class VeiculoFacade {

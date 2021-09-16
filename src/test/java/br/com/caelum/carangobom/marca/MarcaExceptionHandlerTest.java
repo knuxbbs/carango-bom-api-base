@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
+import br.com.caelum.carangobom.MarcaCadastradaAnteriormenteException;
+import br.com.caelum.carangobom.MarcaNaoEncontradaException;
+import br.com.caelum.carangobom.webapi.MarcaExceptionHandler;
 
 class MarcaExceptionHandlerTest {
 

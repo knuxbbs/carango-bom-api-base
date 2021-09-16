@@ -9,6 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import br.com.caelum.carangobom.webapi.security.User;
+import br.com.caelum.carangobom.webapi.security.UserRepository;
+import br.com.caelum.carangobom.webapi.security.UserService;
 
 class UserServiceTest {
 

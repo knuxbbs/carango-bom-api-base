@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.marca;
+package br.com.caelum.carangobom;
 
 public class MarcaNaoEncontradaException extends RuntimeException {
 
@@ -7,4 +7,5 @@ public class MarcaNaoEncontradaException extends RuntimeException {
   public MarcaNaoEncontradaException() {
     super("Marca não encontrada");
   }
+
 }

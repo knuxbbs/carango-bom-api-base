@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.veiculo;
+package br.com.caelum.carangobom.viewmodels;
 
 import java.math.BigDecimal;
 import javax.validation.constraints.NotBlank;
