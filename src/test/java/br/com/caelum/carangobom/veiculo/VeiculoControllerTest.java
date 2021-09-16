@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.util.UriComponentsBuilder;
-import br.com.caelum.carangobom.marca.Marca;
+import br.com.caelum.carangobom.domain.Marca;
 import br.com.caelum.carangobom.marca.MarcaRepository;
 
 class VeiculoControllerTest {

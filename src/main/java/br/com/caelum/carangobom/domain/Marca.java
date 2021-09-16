@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.marca;
+package br.com.caelum.carangobom.domain;
 
 import static javax.persistence.GenerationType.IDENTITY;
 import java.util.Objects;
@@ -21,21 +21,16 @@ public class Marca {
 
   protected Marca() {}
 
-  protected Marca(Long id, String nome) {
-    this.id = id;
-    this.nome = nome;
-  }
-
   public Marca(String nome) {
-    this(null, nome);
+    setNome(nome);
   }
 
   public Long getId() {
-    return id;
-  }
+    if (id == null) {
+      return 0L;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
+    return id;
   }
 
   public String getNome() {

@@ -15,55 +15,56 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+import br.com.caelum.carangobom.domain.Marca;
 
 @RestController
 @RequestMapping("/marcas")
 public class MarcaController {
 
-    private MarcaFacade marcaFacade;
+  private MarcaFacade marcaFacade;
 
-    @Autowired
-    public MarcaController(MarcaFacade marcaFacade) {
-        this.marcaFacade = marcaFacade;
-    }
+  @Autowired
+  public MarcaController(MarcaFacade marcaFacade) {
+    this.marcaFacade = marcaFacade;
+  }
 
-    @GetMapping
-    public List<Marca> listarOrdenadoPorNome() {
-        return marcaFacade.listarOrdenadoPorNome();
-    }
+  @GetMapping
+  public List<Marca> listarOrdenadoPorNome() {
+    return marcaFacade.listarOrdenadoPorNome();
+  }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Marca> recuperarPorId(@PathVariable Long id) {
-        var marca = marcaFacade.recuperar(id);
+  @GetMapping("/{id}")
+  public ResponseEntity<Marca> recuperarPorId(@PathVariable Long id) {
+    var marca = marcaFacade.recuperar(id);
 
-        return ResponseEntity.of(marca);
-    }
+    return ResponseEntity.of(marca);
+  }
 
-    @PostMapping
-    @Transactional
-    public ResponseEntity<Marca> cadastrar(@Valid @RequestBody Marca novaMarca,
-            UriComponentsBuilder uriBuilder) {
+  @PostMapping
+  @Transactional
+  public ResponseEntity<Marca> cadastrar(@Valid @RequestBody Marca novaMarca,
+      UriComponentsBuilder uriBuilder) {
+    var marcaCadastrada = marcaFacade.cadastrar(novaMarca);
+    URI h = uriBuilder.path("/marcas/{id}").buildAndExpand(marcaCadastrada.getId()).toUri();
 
-        var marcaCadastrada = marcaFacade.cadastrar(novaMarca);
-        URI h = uriBuilder.path("/marcas/{id}").buildAndExpand(marcaCadastrada.getId()).toUri();
-        return ResponseEntity.created(h).body(marcaCadastrada);
-    }
+    return ResponseEntity.created(h).body(marcaCadastrada);
+  }
 
-    @PutMapping("/{id}")
-    @Transactional
-    public ResponseEntity<Marca> alterar(@PathVariable Long id,
-            @Valid @RequestBody Marca dadosAltercaoMarca) {
+  @PutMapping("/{id}")
+  @Transactional
+  public ResponseEntity<Marca> alterar(@PathVariable Long id,
+      @Valid @RequestBody Marca dadosAltercaoMarca) {
+    var marcaAlterada = marcaFacade.alterar(id, dadosAltercaoMarca);
 
-        var marcaAlterada = marcaFacade.alterar(id, dadosAltercaoMarca);
-        return ResponseEntity.ok(marcaAlterada);
-    }
+    return ResponseEntity.ok(marcaAlterada);
+  }
 
-    @DeleteMapping("/{id}")
-    @Transactional
-    public ResponseEntity<Marca> deletar(@PathVariable Long id) {
+  @DeleteMapping("/{id}")
+  @Transactional
+  public ResponseEntity<Marca> deletar(@PathVariable Long id) {
+    var marca = marcaFacade.deletar(id);
 
-        var marca = marcaFacade.deletar(id);
+    return ResponseEntity.ok(marca);
+  }
 
-        return ResponseEntity.ok(marca);
-    }
 }

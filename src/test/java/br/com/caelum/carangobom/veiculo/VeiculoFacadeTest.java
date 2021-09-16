@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
-import br.com.caelum.carangobom.marca.Marca;
+import br.com.caelum.carangobom.domain.Marca;
 import br.com.caelum.carangobom.marca.MarcaRepository;
 
 class VeiculoFacadeTest {
@@ -69,6 +69,7 @@ class VeiculoFacadeTest {
     when(veiculoRepository.save(veiculo)).thenReturn(veiculo);
 
     var form = new VeiculoForm();
+    form.setMarcaId(marca.getId());
     form.setModelo(veiculo.getModelo());
     form.setAno(veiculo.getAno());
     form.setValor(veiculo.getValor());

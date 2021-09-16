@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import br.com.caelum.carangobom.marca.Marca;
+import br.com.caelum.carangobom.domain.Marca;
 
 @Entity
 public class Veiculo {

@@ -1,5 +1,7 @@
 package br.com.caelum.carangobom.marca;
 
+import br.com.caelum.carangobom.domain.Marca;
+
 public class MarcaView {
   private Long id;
   private String nome;
