@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
-import br.com.caelum.carangobom.domain.Marca;
+import br.com.caelum.carangobom.Marca;
 
 @RestController
 @RequestMapping("/marcas")

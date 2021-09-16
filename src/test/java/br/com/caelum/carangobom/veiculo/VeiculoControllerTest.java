@@ -11,7 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.util.UriComponentsBuilder;
-import br.com.caelum.carangobom.domain.Marca;
+import br.com.caelum.carangobom.Marca;
+import br.com.caelum.carangobom.Veiculo;
 import br.com.caelum.carangobom.marca.MarcaRepository;
 
 class VeiculoControllerTest {
@@ -39,7 +40,7 @@ class VeiculoControllerTest {
   @Test
   void deveRetornarVeiculoPeloId() {
     var marca = new Marca("Volkswagen");
-    var veiculo = new Veiculo(1L, "Gol", "2021", marca, new BigDecimal("70000"));
+    var veiculo = new Veiculo("Gol", "2021", marca, new BigDecimal("70000"));
 
     when(veiculoFacade.recuperar(veiculo.getId()))
         .thenReturn(Optional.of(new VeiculoView(veiculo)));
@@ -61,7 +62,7 @@ class VeiculoControllerTest {
     form.setValor(new BigDecimal("70000"));
 
     var marca = new Marca("Volkswagen");
-    var veiculo = new Veiculo(1L, form.getModelo(), form.getAno(), marca, form.getValor());
+    var veiculo = new Veiculo(form.getModelo(), form.getAno(), marca, form.getValor());
 
     when(veiculoFacade.cadastrar(form)).thenReturn(new VeiculoView(veiculo));
     when(marcaRepository.findById(marca.getId())).thenReturn(Optional.of(marca));
@@ -79,7 +80,7 @@ class VeiculoControllerTest {
   @Test
   void deveAlterarVeiculoExistente() {
     var marca = new Marca("Volkswagen");
-    var veiculo = new Veiculo(1L, "Gol", "2021", marca, new BigDecimal("70000"));
+    var veiculo = new Veiculo("Gol", "2021", marca, new BigDecimal("70000"));
 
     var form = new VeiculoForm();
     form.setModelo("Golf");
@@ -90,7 +91,7 @@ class VeiculoControllerTest {
     when(marcaRepository.findById(marca.getId())).thenReturn(Optional.of(marca));
     when(veiculoFacade.alterar(veiculo.getId(), form)).thenReturn(new VeiculoView(veiculo));
 
-    var resposta = veiculoController.alterar(1L, form);
+    var resposta = veiculoController.alterar(0L, form);
     assertEquals(HttpStatus.OK, resposta.getStatusCode());
 
     var view = resposta.getBody();

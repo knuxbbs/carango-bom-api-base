@@ -3,6 +3,7 @@ package br.com.caelum.carangobom.veiculo;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.repository.Repository;
+import br.com.caelum.carangobom.Veiculo;
 
 public interface VeiculoRepository extends Repository<Veiculo, Long> {
   List<Veiculo> findAll();

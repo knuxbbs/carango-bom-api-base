@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.veiculo;
+package br.com.caelum.carangobom;
 
 import static javax.persistence.GenerationType.IDENTITY;
 import java.math.BigDecimal;
@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import br.com.caelum.carangobom.domain.Marca;
 
 @Entity
 public class Veiculo {
@@ -33,19 +32,18 @@ public class Veiculo {
 
   protected Veiculo() {}
 
-  protected Veiculo(Long id, String modelo, String ano, Marca marca, BigDecimal valor) {
-    this.id = id;
+  public Veiculo(String modelo, String ano, Marca marca, BigDecimal valor) {
     this.marca = marca;
     this.modelo = modelo;
     this.ano = ano;
     this.valor = valor;
   }
 
-  public Veiculo(String modelo, String ano, Marca marca, BigDecimal valor) {
-    this(null, modelo, ano, marca, valor);
-  }
-
   public Long getId() {
+    if (id == null) {
+      return 0L;
+    }
+
     return id;
   }
 

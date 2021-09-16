@@ -7,15 +7,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
-import br.com.caelum.carangobom.domain.Marca;
+import br.com.caelum.carangobom.Marca;
+import br.com.caelum.carangobom.Veiculo;
 import br.com.caelum.carangobom.marca.MarcaRepository;
 
 class VeiculoFacadeTest {
@@ -28,7 +26,10 @@ class VeiculoFacadeTest {
   @Mock
   private MarcaRepository marcaRepository;
 
-  private List<Veiculo> veiculos = obterVeiculos();
+  private static final Long DEFAULT_ID = 0L;
+  private static final Marca MARCA_DEFAULT = new Marca("Audi");
+  private static final Veiculo VEICULO_DEFAULT =
+      new Veiculo("A4", "2000", MARCA_DEFAULT, new BigDecimal("20000"));
 
   @BeforeEach
   public void configuraMock() {
@@ -37,27 +38,23 @@ class VeiculoFacadeTest {
     veiculoFacade = new VeiculoFacade(veiculoRepository, marcaRepository);
   }
 
-  @ParameterizedTest
-  @ValueSource(longs = {1L, 2L})
-  void deveRetornarVeiculoPeloId(Long id) {
-    var veiculoASerRecuperado = veiculos.stream().filter(x -> x.getId().equals(id)).findFirst();
+  @Test
+  void deveRetornarVeiculoPeloId() {
+    when(veiculoRepository.findById(DEFAULT_ID)).thenReturn(Optional.of(VEICULO_DEFAULT));
 
-    when(veiculoRepository.findById(id)).thenReturn(veiculoASerRecuperado);
+    var veiculoView = veiculoFacade.recuperar(DEFAULT_ID).get();
 
-    var veiculo = veiculoASerRecuperado.get();
-    var veiculoView = veiculoFacade.recuperar(id).get();
+    assertEquals(VEICULO_DEFAULT.getId(), veiculoView.getId());
+    assertEquals(VEICULO_DEFAULT.getModelo(), veiculoView.getModelo());
+    assertEquals(VEICULO_DEFAULT.getValor(), veiculoView.getValor());
 
-    assertEquals(veiculo.getId(), veiculoView.getId());
-    assertEquals(veiculo.getModelo(), veiculoView.getModelo());
-    assertEquals(veiculo.getValor(), veiculoView.getValor());
-
-    var marca = veiculo.getMarca();
+    var marca = VEICULO_DEFAULT.getMarca();
     var marcaView = veiculoView.getMarca();
 
     assertEquals(marca.getId(), marcaView.getId());
     assertEquals(marca.getNome(), marcaView.getNome());
 
-    verify(veiculoRepository).findById(id);
+    verify(veiculoRepository).findById(DEFAULT_ID);
   }
 
   @Test
@@ -96,16 +93,6 @@ class VeiculoFacadeTest {
     form.setValor(veiculo.getValor());
 
     assertThrows(EntityNotFoundException.class, () -> veiculoFacade.alterar(1L, form));
-  }
-
-  private List<Veiculo> obterVeiculos() {
-    var marca = new Marca("Audi");
-    var veiculo0 = new Veiculo(1L, "A4", "2000", marca, new BigDecimal("20000"));
-    var veiculo1 = new Veiculo(2L, "A6", "2020", marca, new BigDecimal("22000"));
-
-    var veiculos = List.of(veiculo0, veiculo1);
-
-    return veiculos;
   }
 
 }

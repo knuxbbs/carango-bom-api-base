@@ -9,7 +9,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import br.com.caelum.carangobom.domain.Marca;
+import br.com.caelum.carangobom.Marca;
 
 class MarcaFacadeTest {
 

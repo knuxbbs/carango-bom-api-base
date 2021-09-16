@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.domain;
+package br.com.caelum.carangobom;
 
 import static javax.persistence.GenerationType.IDENTITY;
 import java.util.Objects;

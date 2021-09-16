@@ -10,7 +10,7 @@ import org.mockito.Mock;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import br.com.caelum.carangobom.domain.Marca;
+import br.com.caelum.carangobom.Marca;
 
 class ErroValidacaoHandlerTest {
 

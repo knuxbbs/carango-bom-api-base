@@ -1,6 +1,7 @@
 package br.com.caelum.carangobom.veiculo;
 
 import java.math.BigDecimal;
+import br.com.caelum.carangobom.Veiculo;
 import br.com.caelum.carangobom.marca.MarcaView;
 
 public class VeiculoView {
