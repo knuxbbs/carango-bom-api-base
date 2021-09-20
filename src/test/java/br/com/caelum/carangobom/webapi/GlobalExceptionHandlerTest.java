@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.validacao;
+package br.com.caelum.carangobom.webapi;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -12,9 +12,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import br.com.caelum.carangobom.domain.Marca;
 import br.com.caelum.carangobom.viewmodels.FieldErrorView;
-import br.com.caelum.carangobom.webapi.GlobalExceptionHandler;
 
-class ErroValidacaoHandlerTest {
+class GlobalExceptionHandlerTest {
 
   @Mock
   BindingResult bindingResult;
