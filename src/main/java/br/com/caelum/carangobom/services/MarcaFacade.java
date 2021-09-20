@@ -2,66 +2,67 @@ package br.com.caelum.carangobom.services;
 
 import java.util.List;
 import java.util.Optional;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.caelum.carangobom.domain.Marca;
 import br.com.caelum.carangobom.domain.MarcaCadastradaAnteriormenteException;
-import br.com.caelum.carangobom.domain.MarcaNaoEncontradaException;
 import br.com.caelum.carangobom.repositories.MarcaRepository;
+import br.com.caelum.carangobom.viewmodels.MarcaForm;
 
 @Service
 public class MarcaFacade {
 
-    private MarcaRepository repository;
+  private MarcaRepository repository;
 
-    @Autowired
-    public MarcaFacade(MarcaRepository repository) {
-        this.repository = repository;
+  @Autowired
+  public MarcaFacade(MarcaRepository repository) {
+    this.repository = repository;
+  }
+
+  public List<Marca> listarOrdenadoPorNome() {
+    return repository.findAllByOrderByNome();
+  }
+
+  public Optional<Marca> recuperar(Long id) {
+    return repository.findById(id);
+  }
+
+  public Marca cadastrar(MarcaForm form) {
+    var marcaOpt = repository.findByNome(form.getNome());
+
+    if (marcaOpt.isPresent()) {
+      throw new MarcaCadastradaAnteriormenteException();
     }
 
-    public List<Marca> listarOrdenadoPorNome() {
-        return repository.findAllByOrderByNome();
+    var marca = new Marca(form.getNome());
+
+    return repository.save(marca);
+  }
+
+  public Marca alterar(Long id, MarcaForm form) {
+    var marcaOpt = repository.findById(id);
+
+    if (marcaOpt.isEmpty()) {
+      throw new EntityNotFoundException("Marca não encontrada: " + id);
     }
 
-    public Optional<Marca> recuperar(Long id) {
-        return repository.findById(id);
+    var marca = marcaOpt.get();
+    marca.setNome(form.getNome());
+
+    return repository.save(marca);
+  }
+
+  public Marca deletar(Long id) {
+    var marcaOpt = repository.findById(id);
+
+    if (!marcaOpt.isPresent()) {
+      throw new EntityNotFoundException("Marca não encontrada: " + id);
     }
 
-    public Marca cadastrar(Marca novaMarca) {
-        var marca = repository.findByNome(novaMarca.getNome());
+    repository.deleteById(id);
 
-        if (marca.isPresent()) {
-            throw new MarcaCadastradaAnteriormenteException();
-        }
-
-        return repository.save(novaMarca);
-    }
-
-    public Marca alterar(Long id, Marca dadosAlteracaoMarca) {
-        var marca = recuperar(id);
-
-        if (marca.isEmpty()) {
-            throw new MarcaNaoEncontradaException();
-        }
-
-        var marcaParaAlteracao = marca.get();
-
-        marcaParaAlteracao.setNome(dadosAlteracaoMarca.getNome());
-
-        return repository.save(marcaParaAlteracao);
-    }
-
-    public Marca deletar(Long id) {
-        Optional<Marca> marca = repository.findById(id);
-
-        if (!marca.isPresent()) {
-            throw new MarcaNaoEncontradaException();
-        }
-
-        repository.deleteById(id);
-
-        return marca.get();
-    }
-
+    return marcaOpt.get();
+  }
 
 }

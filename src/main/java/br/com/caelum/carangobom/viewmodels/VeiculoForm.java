@@ -5,6 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class VeiculoForm {
+
   private Long marcaId;
 
   @NotBlank
@@ -48,4 +49,5 @@ public class VeiculoForm {
   public void setValor(BigDecimal valor) {
     this.valor = valor;
   }
+
 }

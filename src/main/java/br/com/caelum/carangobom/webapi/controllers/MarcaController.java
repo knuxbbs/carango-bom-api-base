@@ -1,6 +1,5 @@
 package br.com.caelum.carangobom.webapi.controllers;
 
-import java.net.URI;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import br.com.caelum.carangobom.domain.Marca;
 import br.com.caelum.carangobom.services.MarcaFacade;
+import br.com.caelum.carangobom.viewmodels.MarcaForm;
 
 @RestController
 @RequestMapping("/marcas")
@@ -43,19 +43,18 @@ public class MarcaController {
 
   @PostMapping
   @Transactional
-  public ResponseEntity<Marca> cadastrar(@Valid @RequestBody Marca novaMarca,
+  public ResponseEntity<Marca> cadastrar(@Valid @RequestBody MarcaForm form,
       UriComponentsBuilder uriBuilder) {
-    var marcaCadastrada = marcaFacade.cadastrar(novaMarca);
-    URI h = uriBuilder.path("/marcas/{id}").buildAndExpand(marcaCadastrada.getId()).toUri();
+    var marcaCadastrada = marcaFacade.cadastrar(form);
+    var h = uriBuilder.path("/marcas/{id}").buildAndExpand(marcaCadastrada.getId()).toUri();
 
     return ResponseEntity.created(h).body(marcaCadastrada);
   }
 
   @PutMapping("/{id}")
   @Transactional
-  public ResponseEntity<Marca> alterar(@PathVariable Long id,
-      @Valid @RequestBody Marca dadosAltercaoMarca) {
-    var marcaAlterada = marcaFacade.alterar(id, dadosAltercaoMarca);
+  public ResponseEntity<Marca> alterar(@PathVariable Long id, @Valid @RequestBody MarcaForm form) {
+    var marcaAlterada = marcaFacade.alterar(id, form);
 
     return ResponseEntity.ok(marcaAlterada);
   }

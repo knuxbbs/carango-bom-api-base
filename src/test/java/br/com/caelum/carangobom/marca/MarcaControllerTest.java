@@ -15,6 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.caelum.carangobom.domain.Marca;
 import br.com.caelum.carangobom.repositories.MarcaRepository;
 import br.com.caelum.carangobom.services.MarcaFacade;
+import br.com.caelum.carangobom.viewmodels.MarcaForm;
 import br.com.caelum.carangobom.webapi.controllers.MarcaController;
 
 class MarcaControllerTest {
@@ -27,6 +28,8 @@ class MarcaControllerTest {
 
   @Mock
   private MarcaRepository marcaRepository;
+
+  private static final String NOME_DEFAULT = "Audi";
 
   @BeforeEach
   public void configuraMock() {
@@ -48,7 +51,7 @@ class MarcaControllerTest {
 
   @Test
   void deveRetornarMarcaPeloId() {
-    Marca audi = new Marca("Audi");
+    Marca audi = new Marca(NOME_DEFAULT);
 
     when(marcaFacade.recuperar(1L)).thenReturn(Optional.of(audi));
 
@@ -66,32 +69,37 @@ class MarcaControllerTest {
 
   @Test
   void deveResponderCreatedELocationQuandoCadastrarMarca() {
-    Marca nova = new Marca("Ferrari");
+    var form = new MarcaForm();
+    form.setNome(NOME_DEFAULT);
 
-    when(marcaFacade.cadastrar(nova)).thenReturn(nova);
+    Marca nova = new Marca(form.getNome());
 
-    ResponseEntity<Marca> resposta = marcaController.cadastrar(nova, uriBuilder);
+    when(marcaFacade.cadastrar(form)).thenReturn(nova);
+
+    ResponseEntity<Marca> resposta = marcaController.cadastrar(form, uriBuilder);
     assertEquals(HttpStatus.CREATED, resposta.getStatusCode());
     assertEquals("http://localhost:8080/marcas/0", resposta.getHeaders().getLocation().toString());
   }
 
   @Test
   void deveAlterarNomeQuandoMarcaExistir() {
-    Marca audi = new Marca("Audi");
-    Marca novoAudi = new Marca("NOVA Audi");
+    var form = new MarcaForm();
+    form.setNome(NOME_DEFAULT);
 
-    when(marcaFacade.alterar(1L, audi)).thenReturn(novoAudi);
+    Marca marca = new Marca(form.getNome());
 
-    ResponseEntity<Marca> resposta = marcaController.alterar(1L, audi);
+    when(marcaFacade.alterar(1L, form)).thenReturn(marca);
+
+    ResponseEntity<Marca> resposta = marcaController.alterar(1L, form);
     assertEquals(HttpStatus.OK, resposta.getStatusCode());
 
     Marca marcaAlterada = resposta.getBody();
-    assertEquals("NOVA Audi", marcaAlterada.getNome());
+    assertEquals(NOME_DEFAULT, marcaAlterada.getNome());
   }
 
   @Test
   void deveDeletarMarcaExistente() {
-    Marca audi = new Marca("Audi");
+    Marca audi = new Marca(NOME_DEFAULT);
 
     when(marcaFacade.deletar(1L)).thenReturn(audi);
 

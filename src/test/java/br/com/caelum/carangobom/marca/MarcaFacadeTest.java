@@ -6,14 +6,15 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 import java.util.Optional;
+import javax.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import br.com.caelum.carangobom.domain.Marca;
 import br.com.caelum.carangobom.domain.MarcaCadastradaAnteriormenteException;
-import br.com.caelum.carangobom.domain.MarcaNaoEncontradaException;
 import br.com.caelum.carangobom.repositories.MarcaRepository;
 import br.com.caelum.carangobom.services.MarcaFacade;
+import br.com.caelum.carangobom.viewmodels.MarcaForm;
 
 class MarcaFacadeTest {
 
@@ -21,6 +22,8 @@ class MarcaFacadeTest {
 
   @Mock
   private MarcaRepository marcaRepository;
+
+  private static final String NOME_DEFAULT = "Ferrari";
 
   @BeforeEach
   public void configuraMock() {
@@ -31,7 +34,7 @@ class MarcaFacadeTest {
 
   @Test
   void deveRetornarMarcaPeloId() {
-    Marca audi = new Marca("Audi");
+    Marca audi = new Marca(NOME_DEFAULT);
 
     when(marcaRepository.findById(1L)).thenReturn(Optional.of(audi));
 
@@ -43,11 +46,14 @@ class MarcaFacadeTest {
 
   @Test
   void deveCadastrarMarca() {
-    Marca novaMarca = new Marca("Ferrari");
+    var form = new MarcaForm();
+    form.setNome(NOME_DEFAULT);
 
-    when(marcaRepository.save(novaMarca)).thenReturn(new Marca("Ferrari"));
+    var novaMarca = new Marca(form.getNome());
 
-    var marcaCadastrada = marcaFacade.cadastrar(novaMarca);
+    when(marcaRepository.save(novaMarca)).thenReturn(novaMarca);
+
+    var marcaCadastrada = marcaFacade.cadastrar(form);
 
     assertEquals(novaMarca.getNome(), marcaCadastrada.getNome());
     verify(marcaRepository).save(novaMarca);
@@ -55,28 +61,31 @@ class MarcaFacadeTest {
 
   @Test
   void naoDeveCadastrarMarcaDuplicada() {
-    Marca novaMarca = new Marca("Ferrari");
+    var form = new MarcaForm();
+    form.setNome(NOME_DEFAULT);
 
-    when(marcaRepository.findByNome("Ferrari")).thenReturn(Optional.of(novaMarca));
+    var novaMarca = new Marca(form.getNome());
 
-    assertThrows(MarcaCadastradaAnteriormenteException.class,
-        () -> marcaFacade.cadastrar(novaMarca));
+    when(marcaRepository.findByNome(NOME_DEFAULT)).thenReturn(Optional.of(novaMarca));
+
+    assertThrows(MarcaCadastradaAnteriormenteException.class, () -> marcaFacade.cadastrar(form));
   }
 
   @Test
   void naoDeveAlterarMarcaInexistente() {
-    Marca nova = new Marca("Ferrari");
+    var form = new MarcaForm();
+    form.setNome(NOME_DEFAULT);
 
     when(marcaRepository.findById(1L)).thenReturn(Optional.empty());
 
-    assertThrows(MarcaNaoEncontradaException.class, () -> marcaFacade.alterar(1L, nova));
+    assertThrows(EntityNotFoundException.class, () -> marcaFacade.alterar(1L, form));
   }
 
   @Test
   void naoDeveDeletarMarcaInexistente() {
     when(marcaRepository.findById(1L)).thenReturn(Optional.empty());
 
-    assertThrows(MarcaNaoEncontradaException.class, () -> marcaFacade.deletar(1L));
+    assertThrows(EntityNotFoundException.class, () -> marcaFacade.deletar(1L));
   }
 
 }

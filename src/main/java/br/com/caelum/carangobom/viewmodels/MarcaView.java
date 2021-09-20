@@ -3,6 +3,7 @@ package br.com.caelum.carangobom.viewmodels;
 import br.com.caelum.carangobom.domain.Marca;
 
 public class MarcaView {
+
   private Long id;
   private String nome;
 
@@ -18,4 +19,5 @@ public class MarcaView {
   public String getNome() {
     return nome;
   }
+
 }
