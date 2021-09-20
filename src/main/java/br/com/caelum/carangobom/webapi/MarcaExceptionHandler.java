@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import br.com.caelum.carangobom.MarcaCadastradaAnteriormenteException;
-import br.com.caelum.carangobom.MarcaNaoEncontradaException;
+import br.com.caelum.carangobom.domain.MarcaCadastradaAnteriormenteException;
+import br.com.caelum.carangobom.domain.MarcaNaoEncontradaException;
 
 @RestControllerAdvice
 public class MarcaExceptionHandler {

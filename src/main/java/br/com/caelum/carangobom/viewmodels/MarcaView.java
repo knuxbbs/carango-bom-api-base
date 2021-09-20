@@ -1,6 +1,6 @@
 package br.com.caelum.carangobom.viewmodels;
 
-import br.com.caelum.carangobom.Marca;
+import br.com.caelum.carangobom.domain.Marca;
 
 public class MarcaView {
   private Long id;

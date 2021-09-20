@@ -1,7 +1,7 @@
 package br.com.caelum.carangobom.viewmodels;
 
 import java.math.BigDecimal;
-import br.com.caelum.carangobom.Veiculo;
+import br.com.caelum.carangobom.domain.Veiculo;
 
 public class VeiculoView {
   private Long id;

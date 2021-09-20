@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom;
+package br.com.caelum.carangobom.domain;
 
 import static javax.persistence.GenerationType.IDENTITY;
 import java.math.BigDecimal;

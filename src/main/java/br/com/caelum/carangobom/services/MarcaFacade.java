@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import br.com.caelum.carangobom.Marca;
-import br.com.caelum.carangobom.MarcaCadastradaAnteriormenteException;
-import br.com.caelum.carangobom.MarcaNaoEncontradaException;
+import br.com.caelum.carangobom.domain.Marca;
+import br.com.caelum.carangobom.domain.MarcaCadastradaAnteriormenteException;
+import br.com.caelum.carangobom.domain.MarcaNaoEncontradaException;
 import br.com.caelum.carangobom.repositories.MarcaRepository;
 
 @Service

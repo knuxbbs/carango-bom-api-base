@@ -12,7 +12,7 @@ import org.mockito.Mock;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
-import br.com.caelum.carangobom.Marca;
+import br.com.caelum.carangobom.domain.Marca;
 import br.com.caelum.carangobom.repositories.MarcaRepository;
 import br.com.caelum.carangobom.services.MarcaFacade;
 import br.com.caelum.carangobom.webapi.controllers.MarcaController;

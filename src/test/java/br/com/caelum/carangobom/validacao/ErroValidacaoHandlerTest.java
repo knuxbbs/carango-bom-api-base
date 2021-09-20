@@ -10,9 +10,9 @@ import org.mockito.Mock;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import br.com.caelum.carangobom.Marca;
-import br.com.caelum.carangobom.viewmodels.ErroDeParametroOutputDto;
-import br.com.caelum.carangobom.webapi.ErroValidacaoHandler;
+import br.com.caelum.carangobom.domain.Marca;
+import br.com.caelum.carangobom.viewmodels.FieldErrorView;
+import br.com.caelum.carangobom.webapi.GlobalExceptionHandler;
 
 class ErroValidacaoHandlerTest {
 
@@ -34,18 +34,18 @@ class ErroValidacaoHandlerTest {
 
     var exception = new MethodArgumentNotValidException(null, bindingResult);
 
-    var handler = new ErroValidacaoHandler();
-    var listaDto = handler.validacao(exception);
+    var handler = new GlobalExceptionHandler();
+    var listaDto = handler.handle(exception);
 
-    List<ErroDeParametroOutputDto> dtos = listaDto.getErros();
+    List<FieldErrorView> dtos = listaDto.getErrors();
 
-    assertEquals(2, listaDto.getQuantidadeDeErros());
+    assertEquals(2, dtos.size());
 
-    assertEquals("nome", dtos.get(0).getParametro());
-    assertEquals("Deve ser preenchido.", dtos.get(0).getMensagem());
+    assertEquals("nome", dtos.get(0).getField());
+    assertEquals("Deve ser preenchido.", dtos.get(0).getMessage());
 
-    assertEquals("nome", dtos.get(1).getParametro());
-    assertEquals("Deve ter 2 ou mais caracteres.", dtos.get(1).getMensagem());
+    assertEquals("nome", dtos.get(1).getField());
+    assertEquals("Deve ter 2 ou mais caracteres.", dtos.get(1).getMessage());
   }
 
 }

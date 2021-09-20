@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom;
+package br.com.caelum.carangobom.domain;
 
 public class MarcaCadastradaAnteriormenteException extends RuntimeException {
 
