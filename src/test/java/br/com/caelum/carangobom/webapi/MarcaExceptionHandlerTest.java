@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import br.com.caelum.carangobom.domain.MarcaCadastradaAnteriormenteException;
 import br.com.caelum.carangobom.domain.MarcaNaoEncontradaException;
-import br.com.caelum.carangobom.webapi.MarcaExceptionHandler;
 
 class MarcaExceptionHandlerTest {
 
@@ -23,7 +22,7 @@ class MarcaExceptionHandlerTest {
 
   @Test
   void marcaNaoEncontradaDeveRetornarNotFound() {
-    var exception = new MarcaNaoEncontradaException();
+    var exception = new MarcaNaoEncontradaException(1l);
 
     var handler = new MarcaExceptionHandler();
     var response = handler.handle(exception);

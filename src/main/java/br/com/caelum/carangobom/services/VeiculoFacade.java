@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import br.com.caelum.carangobom.domain.MarcaNaoEncontradaException;
 import br.com.caelum.carangobom.domain.Veiculo;
 import br.com.caelum.carangobom.repositories.MarcaRepository;
 import br.com.caelum.carangobom.repositories.VeiculoRepository;
@@ -44,7 +43,7 @@ public class VeiculoFacade {
     var marca = marcaRepository.findById(form.getMarcaId());
 
     if (marca.isEmpty()) {
-      throw new MarcaNaoEncontradaException();
+      throw new EntityNotFoundException("Marca não encontrada: " + form.getMarcaId());
     }
 
     var veiculo = new Veiculo(form.getModelo(), form.getAno(), marca.get(), form.getValor());
@@ -64,7 +63,7 @@ public class VeiculoFacade {
     var marca = marcaRepository.findById(form.getMarcaId());
 
     if (marca.isEmpty()) {
-      throw new MarcaNaoEncontradaException();
+      throw new EntityNotFoundException("Marca não encontrada: " + form.getMarcaId());
     }
 
     var veiculo = veiculoOpt.get();

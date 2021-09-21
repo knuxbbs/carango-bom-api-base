@@ -1,11 +1,13 @@
 package br.com.caelum.carangobom.domain;
 
-public class MarcaNaoEncontradaException extends RuntimeException {
+import javax.persistence.EntityNotFoundException;
 
-  private static final long serialVersionUID = 1L;
+public class MarcaNaoEncontradaException extends EntityNotFoundException {
 
-  public MarcaNaoEncontradaException() {
-    super("Marca não encontrada");
+  private static final long serialVersionUID = 2402240702720294789L;
+
+  public MarcaNaoEncontradaException(long id) {
+    super("Marca não encontrada: " + id);
   }
 
 }
