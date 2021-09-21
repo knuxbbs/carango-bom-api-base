@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 import java.util.List;
+import javax.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -45,6 +46,16 @@ class GlobalExceptionHandlerTest {
 
     assertEquals("nome", dtos.get(1).getField());
     assertEquals("Deve ter 2 ou mais caracteres.", dtos.get(1).getMessage());
+  }
+
+  @Test
+  void deveExtrairMensagemDeErroDaException() {
+    var exception = new EntityNotFoundException();
+
+    var handler = new GlobalExceptionHandler();
+    var response = handler.handle(exception);
+
+    assertEquals(exception.getMessage(), response.getMessage());
   }
 
 }

@@ -8,7 +8,6 @@ import org.mockito.Mock;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import br.com.caelum.carangobom.domain.MarcaCadastradaAnteriormenteException;
-import br.com.caelum.carangobom.domain.MarcaNaoEncontradaException;
 
 class MarcaExceptionHandlerTest {
 
@@ -18,17 +17,6 @@ class MarcaExceptionHandlerTest {
   @BeforeEach
   public void configuraMock() {
     openMocks(this);
-  }
-
-  @Test
-  void marcaNaoEncontradaDeveRetornarNotFound() {
-    var exception = new MarcaNaoEncontradaException(1l);
-
-    var handler = new MarcaExceptionHandler();
-    var response = handler.handle(exception);
-
-    assertEquals(HttpStatus.NOT_FOUND, response.getBody().getHttpStatus());
-    assertEquals(exception.getMessage(), response.getBody().getMessage());
   }
 
   @Test
