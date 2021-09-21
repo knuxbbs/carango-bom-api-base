@@ -12,9 +12,7 @@ public class VeiculoForm {
   @Size(min = 2, message = "Deve ter {min} ou mais caracteres.")
   private String modelo;
 
-  @NotBlank
-  @Size(min = 4, max = 4, message = "Deve ter {min} ou mais caracteres.")
-  private String ano;
+  private int ano;
 
   private BigDecimal valor;
 
@@ -34,11 +32,11 @@ public class VeiculoForm {
     this.modelo = modelo;
   }
 
-  public String getAno() {
+  public int getAno() {
     return ano;
   }
 
-  public void setAno(String ano) {
+  public void setAno(int ano) {
     this.ano = ano;
   }
 

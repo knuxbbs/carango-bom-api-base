@@ -6,7 +6,7 @@ import br.com.caelum.carangobom.domain.Veiculo;
 public class VeiculoView {
   private Long id;
   private String modelo;
-  private String ano;
+  private int ano;
   private BigDecimal valor;
   private MarcaView marca;
 
@@ -26,7 +26,7 @@ public class VeiculoView {
     return modelo;
   }
 
-  public String getAno() {
+  public int getAno() {
     return ano;
   }
 

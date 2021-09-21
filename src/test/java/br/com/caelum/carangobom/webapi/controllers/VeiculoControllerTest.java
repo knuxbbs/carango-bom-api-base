@@ -18,7 +18,6 @@ import br.com.caelum.carangobom.repositories.VeiculoRepository;
 import br.com.caelum.carangobom.services.VeiculoService;
 import br.com.caelum.carangobom.viewmodels.VeiculoForm;
 import br.com.caelum.carangobom.viewmodels.VeiculoView;
-import br.com.caelum.carangobom.webapi.controllers.VeiculoController;
 
 class VeiculoControllerTest {
 
@@ -45,7 +44,7 @@ class VeiculoControllerTest {
   @Test
   void deveRetornarVeiculoPeloId() {
     var marca = new Marca("Volkswagen");
-    var veiculo = new Veiculo("Gol", "2021", marca, new BigDecimal("70000"));
+    var veiculo = new Veiculo("Gol", 2021, marca, new BigDecimal("70000"));
 
     when(veiculoFacade.recuperar(veiculo.getId()))
         .thenReturn(Optional.of(new VeiculoView(veiculo)));
@@ -63,7 +62,7 @@ class VeiculoControllerTest {
   void deveResponderCreatedELocationQuandoCadastrarVeiculo() {
     var form = new VeiculoForm();
     form.setModelo("Gol");
-    form.setAno("2021");
+    form.setAno(2021);
     form.setValor(new BigDecimal("70000"));
 
     var marca = new Marca("Volkswagen");
@@ -85,11 +84,11 @@ class VeiculoControllerTest {
   @Test
   void deveAlterarVeiculoExistente() {
     var marca = new Marca("Volkswagen");
-    var veiculo = new Veiculo("Gol", "2021", marca, new BigDecimal("70000"));
+    var veiculo = new Veiculo("Gol", 2021, marca, new BigDecimal("70000"));
 
     var form = new VeiculoForm();
     form.setModelo("Golf");
-    form.setAno("2010");
+    form.setAno(2010);
     form.setValor(new BigDecimal("75000"));
 
     when(veiculoRepository.findById(veiculo.getId())).thenReturn(Optional.of(veiculo));

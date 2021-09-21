@@ -2,16 +2,20 @@ package br.com.caelum.carangobom.domain;
 
 import static javax.persistence.GenerationType.IDENTITY;
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
 public class Veiculo {
+
+  private static final int MAX_YEAR = Calendar.getInstance().get(Calendar.YEAR);
 
   @Id
   @GeneratedValue(strategy = IDENTITY)
@@ -21,9 +25,9 @@ public class Veiculo {
   @Size(min = 2, message = "Deve ter {min} ou mais caracteres.")
   private String modelo;
 
-  @NotBlank
-  @Size(min = 4, max = 4, message = "Deve ter {min} ou mais caracteres.")
-  private String ano;
+  @Min(1886)
+  // @Max(MAX_YEAR)
+  private int ano;
 
   private BigDecimal valor;
 
@@ -32,7 +36,7 @@ public class Veiculo {
 
   protected Veiculo() {}
 
-  public Veiculo(String modelo, String ano, Marca marca, BigDecimal valor) {
+  public Veiculo(String modelo, int ano, Marca marca, BigDecimal valor) {
     this.marca = marca;
     this.modelo = modelo;
     this.ano = ano;
@@ -51,7 +55,7 @@ public class Veiculo {
     return modelo;
   }
 
-  public String getAno() {
+  public int getAno() {
     return ano;
   }
 
@@ -63,7 +67,7 @@ public class Veiculo {
     return marca;
   }
 
-  public void atualizar(String modelo, String ano, Marca marca, BigDecimal valor) {
+  public void atualizar(String modelo, int ano, Marca marca, BigDecimal valor) {
     this.marca = marca;
     this.modelo = modelo;
     this.ano = ano;
