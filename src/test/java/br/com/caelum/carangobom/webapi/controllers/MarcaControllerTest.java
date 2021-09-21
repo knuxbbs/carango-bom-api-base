@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 import br.com.caelum.carangobom.domain.Marca;
 import br.com.caelum.carangobom.repositories.MarcaRepository;
-import br.com.caelum.carangobom.services.MarcaFacade;
+import br.com.caelum.carangobom.services.MarcaService;
 import br.com.caelum.carangobom.viewmodels.MarcaForm;
 import br.com.caelum.carangobom.webapi.controllers.MarcaController;
 
@@ -24,7 +24,7 @@ class MarcaControllerTest {
   private UriComponentsBuilder uriBuilder;
 
   @Mock
-  private MarcaFacade marcaFacade;
+  private MarcaService marcaFacade;
 
   @Mock
   private MarcaRepository marcaRepository;

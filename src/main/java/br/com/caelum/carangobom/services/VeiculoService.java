@@ -13,12 +13,13 @@ import br.com.caelum.carangobom.viewmodels.VeiculoForm;
 import br.com.caelum.carangobom.viewmodels.VeiculoView;
 
 @Service
-public class VeiculoFacade {
+public class VeiculoService {
+
   private VeiculoRepository veiculoRepository;
   private MarcaRepository marcaRepository;
 
   @Autowired
-  public VeiculoFacade(VeiculoRepository veiculoRepository, MarcaRepository marcaRepository) {
+  public VeiculoService(VeiculoRepository veiculoRepository, MarcaRepository marcaRepository) {
     this.veiculoRepository = veiculoRepository;
     this.marcaRepository = marcaRepository;
   }
@@ -75,4 +76,5 @@ public class VeiculoFacade {
   public void deletar(Long id) {
     veiculoRepository.deleteById(id);
   }
+
 }

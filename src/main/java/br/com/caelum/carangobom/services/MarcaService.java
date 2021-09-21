@@ -11,12 +11,12 @@ import br.com.caelum.carangobom.repositories.MarcaRepository;
 import br.com.caelum.carangobom.viewmodels.MarcaForm;
 
 @Service
-public class MarcaFacade {
+public class MarcaService {
 
   private MarcaRepository repository;
 
   @Autowired
-  public MarcaFacade(MarcaRepository repository) {
+  public MarcaService(MarcaRepository repository) {
     this.repository = repository;
   }
 

@@ -16,12 +16,12 @@ import br.com.caelum.carangobom.domain.Marca;
 import br.com.caelum.carangobom.domain.Veiculo;
 import br.com.caelum.carangobom.repositories.MarcaRepository;
 import br.com.caelum.carangobom.repositories.VeiculoRepository;
-import br.com.caelum.carangobom.services.VeiculoFacade;
+import br.com.caelum.carangobom.services.VeiculoService;
 import br.com.caelum.carangobom.viewmodels.VeiculoForm;
 
-class VeiculoFacadeTest {
+class VeiculoServiceTest {
 
-  private VeiculoFacade veiculoFacade;
+  private VeiculoService veiculoFacade;
 
   @Mock
   private VeiculoRepository veiculoRepository;
@@ -38,7 +38,7 @@ class VeiculoFacadeTest {
   public void configuraMock() {
     openMocks(this);
 
-    veiculoFacade = new VeiculoFacade(veiculoRepository, marcaRepository);
+    veiculoFacade = new VeiculoService(veiculoRepository, marcaRepository);
   }
 
   @Test

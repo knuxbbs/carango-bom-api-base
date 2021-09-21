@@ -13,12 +13,12 @@ import org.mockito.Mock;
 import br.com.caelum.carangobom.domain.Marca;
 import br.com.caelum.carangobom.domain.MarcaCadastradaAnteriormenteException;
 import br.com.caelum.carangobom.repositories.MarcaRepository;
-import br.com.caelum.carangobom.services.MarcaFacade;
+import br.com.caelum.carangobom.services.MarcaService;
 import br.com.caelum.carangobom.viewmodels.MarcaForm;
 
-class MarcaFacadeTest {
+class MarcaServiceTest {
 
-  private MarcaFacade marcaFacade;
+  private MarcaService marcaFacade;
 
   @Mock
   private MarcaRepository marcaRepository;
@@ -29,7 +29,7 @@ class MarcaFacadeTest {
   public void configuraMock() {
     openMocks(this);
 
-    marcaFacade = new MarcaFacade(marcaRepository);
+    marcaFacade = new MarcaService(marcaRepository);
   }
 
   @Test

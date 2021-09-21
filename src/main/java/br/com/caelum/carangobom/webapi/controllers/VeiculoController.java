@@ -14,17 +14,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
-import br.com.caelum.carangobom.services.VeiculoFacade;
+import br.com.caelum.carangobom.services.VeiculoService;
 import br.com.caelum.carangobom.viewmodels.VeiculoForm;
 import br.com.caelum.carangobom.viewmodels.VeiculoView;
 
 @RestController
 @RequestMapping("/veiculos")
 public class VeiculoController {
-  private VeiculoFacade veiculoFacade;
+
+  private VeiculoService veiculoFacade;
 
   @Autowired
-  public VeiculoController(VeiculoFacade veiculoFacade) {
+  public VeiculoController(VeiculoService veiculoFacade) {
     this.veiculoFacade = veiculoFacade;
   }
 
@@ -67,4 +68,5 @@ public class VeiculoController {
 
     return ResponseEntity.ok(new Object());
   }
+
 }

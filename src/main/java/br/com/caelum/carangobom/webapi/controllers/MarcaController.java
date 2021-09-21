@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import br.com.caelum.carangobom.domain.Marca;
-import br.com.caelum.carangobom.services.MarcaFacade;
+import br.com.caelum.carangobom.services.MarcaService;
 import br.com.caelum.carangobom.viewmodels.MarcaForm;
 
 @RestController
 @RequestMapping("/marcas")
 public class MarcaController {
 
-  private MarcaFacade marcaFacade;
+  private MarcaService marcaFacade;
 
   @Autowired
-  public MarcaController(MarcaFacade marcaFacade) {
+  public MarcaController(MarcaService marcaFacade) {
     this.marcaFacade = marcaFacade;
   }
 
