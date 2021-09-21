@@ -5,6 +5,7 @@ import java.time.Year;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
+import br.com.caelum.carangobom.domain.MinYearConstraint;
 
 public class VeiculoForm {
 
@@ -14,7 +15,7 @@ public class VeiculoForm {
   @Size(min = 2, message = "Deve ter {min} ou mais caracteres.")
   private String modelo;
 
-  // @Min(1886)
+  @MinYearConstraint(1886)
   @PastOrPresent
   private Year ano;
 

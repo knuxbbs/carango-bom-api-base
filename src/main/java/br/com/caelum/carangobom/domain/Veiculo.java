@@ -24,7 +24,7 @@ public class Veiculo {
   @Size(min = 2, message = "Deve ter {min} ou mais caracteres.")
   private String modelo;
 
-  // @Min(1886)
+  @MinYearConstraint(1886)
   @PastOrPresent
   @Convert(converter = YearAttributeConverter.class)
   private Year ano;
