@@ -7,6 +7,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 import java.math.BigDecimal;
+import java.time.Year;
 import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +32,7 @@ class VeiculoServiceTest {
   private static final Long DEFAULT_ID = 0L;
   private static final Marca MARCA_DEFAULT = new Marca("Audi");
   private static final Veiculo VEICULO_DEFAULT =
-      new Veiculo("A4", 2000, MARCA_DEFAULT, new BigDecimal("20000"));
+      new Veiculo("A4", Year.of(2000), MARCA_DEFAULT, new BigDecimal("20000"));
 
   @BeforeEach
   public void configuraMock() {
@@ -62,7 +63,7 @@ class VeiculoServiceTest {
   @Test
   void deveCadastrarVeiculo() {
     var marca = new Marca("Fiat");
-    var veiculo = new Veiculo("Gol", 2021, marca, new BigDecimal("70000"));
+    var veiculo = new Veiculo("Gol", Year.of(2021), marca, new BigDecimal("70000"));
 
     when(marcaRepository.findById(marca.getId())).thenReturn(Optional.of(marca));
     when(veiculoRepository.save(veiculo)).thenReturn(veiculo);
@@ -84,7 +85,7 @@ class VeiculoServiceTest {
   @Test
   void naoDeveAlterarVeiculoInexistente() {
     var marca = new Marca("Volkswagen");
-    var veiculo = new Veiculo("Gol", 2021, marca, new BigDecimal("70000"));
+    var veiculo = new Veiculo("Gol", Year.of(2021), marca, new BigDecimal("70000"));
 
     when(veiculoRepository.findById(anyLong())).thenReturn(Optional.empty());
 

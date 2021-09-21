@@ -13,7 +13,7 @@ public class VeiculoView {
   public VeiculoView(Veiculo veiculo) {
     this.id = veiculo.getId();
     this.modelo = veiculo.getModelo();
-    this.ano = veiculo.getAno();
+    this.ano = veiculo.getAno().getValue();
     this.valor = veiculo.getValor();
     this.marca = new MarcaView(veiculo.getMarca());
   }

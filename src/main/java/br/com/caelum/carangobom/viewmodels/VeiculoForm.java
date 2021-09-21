@@ -1,7 +1,9 @@
 package br.com.caelum.carangobom.viewmodels;
 
 import java.math.BigDecimal;
+import java.time.Year;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
 public class VeiculoForm {
@@ -12,7 +14,9 @@ public class VeiculoForm {
   @Size(min = 2, message = "Deve ter {min} ou mais caracteres.")
   private String modelo;
 
-  private int ano;
+  // @Min(1886)
+  @PastOrPresent
+  private Year ano;
 
   private BigDecimal valor;
 
@@ -32,11 +36,11 @@ public class VeiculoForm {
     this.modelo = modelo;
   }
 
-  public int getAno() {
+  public Year getAno() {
     return ano;
   }
 
-  public void setAno(int ano) {
+  public void setAno(Year ano) {
     this.ano = ano;
   }
 

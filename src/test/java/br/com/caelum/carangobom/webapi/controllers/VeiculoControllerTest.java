@@ -5,6 +5,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 import java.math.BigDecimal;
+import java.time.Year;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,7 +45,7 @@ class VeiculoControllerTest {
   @Test
   void deveRetornarVeiculoPeloId() {
     var marca = new Marca("Volkswagen");
-    var veiculo = new Veiculo("Gol", 2021, marca, new BigDecimal("70000"));
+    var veiculo = new Veiculo("Gol", Year.of(2021), marca, new BigDecimal("70000"));
 
     when(veiculoFacade.recuperar(veiculo.getId()))
         .thenReturn(Optional.of(new VeiculoView(veiculo)));
@@ -62,7 +63,7 @@ class VeiculoControllerTest {
   void deveResponderCreatedELocationQuandoCadastrarVeiculo() {
     var form = new VeiculoForm();
     form.setModelo("Gol");
-    form.setAno(2021);
+    form.setAno(Year.of(2021));
     form.setValor(new BigDecimal("70000"));
 
     var marca = new Marca("Volkswagen");
@@ -84,11 +85,11 @@ class VeiculoControllerTest {
   @Test
   void deveAlterarVeiculoExistente() {
     var marca = new Marca("Volkswagen");
-    var veiculo = new Veiculo("Gol", 2021, marca, new BigDecimal("70000"));
+    var veiculo = new Veiculo("Gol", Year.of(2021), marca, new BigDecimal("70000"));
 
     var form = new VeiculoForm();
     form.setModelo("Golf");
-    form.setAno(2010);
+    form.setAno(Year.of(2010));
     form.setValor(new BigDecimal("75000"));
 
     when(veiculoRepository.findById(veiculo.getId())).thenReturn(Optional.of(veiculo));
