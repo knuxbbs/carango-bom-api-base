@@ -107,8 +107,7 @@ class VeiculoControllerTest {
 
   @Test
   void deveDeletarVeiculoExistente() {
-    var resposta = veiculoController.deletar(1L);
-    assertEquals(HttpStatus.OK, resposta.getStatusCode());
+    veiculoController.deletar(1L);
 
     verify(veiculoFacade).deletar(1L);
   }

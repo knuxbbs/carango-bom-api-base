@@ -98,8 +98,8 @@ class MarcaControllerTest {
 
   @Test
   void deveDeletarMarcaExistente() {
-    ResponseEntity<?> resposta = marcaController.deletar(1L);
-    assertEquals(HttpStatus.OK, resposta.getStatusCode());
+    marcaController.deletar(1L);
+
     verify(marcaFacade).deletar(1L);
   }
 }

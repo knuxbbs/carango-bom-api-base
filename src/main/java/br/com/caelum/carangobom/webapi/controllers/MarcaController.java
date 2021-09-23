@@ -3,6 +3,7 @@ package br.com.caelum.carangobom.webapi.controllers;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import br.com.caelum.carangobom.domain.Marca;
@@ -35,7 +37,7 @@ public class MarcaController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Marca> recuperarPorId(@PathVariable Long id) {
+  public ResponseEntity<Marca> recuperarPorId(@PathVariable long id) {
     var marca = marcaFacade.recuperar(id);
 
     return ResponseEntity.of(marca);
@@ -61,10 +63,9 @@ public class MarcaController {
 
   @DeleteMapping("/{id}")
   @Transactional
-  public ResponseEntity<Object> deletar(@PathVariable long id) {
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deletar(@PathVariable long id) {
     marcaFacade.deletar(id);
-
-    return ResponseEntity.ok(new Object());
   }
 
 }
