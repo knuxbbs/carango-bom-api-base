@@ -13,7 +13,6 @@ import org.mockito.Mock;
 import br.com.caelum.carangobom.domain.Marca;
 import br.com.caelum.carangobom.domain.MarcaCadastradaAnteriormenteException;
 import br.com.caelum.carangobom.repositories.MarcaRepository;
-import br.com.caelum.carangobom.services.MarcaService;
 import br.com.caelum.carangobom.viewmodels.MarcaForm;
 
 class MarcaServiceTest {
@@ -79,13 +78,6 @@ class MarcaServiceTest {
     when(marcaRepository.findById(1L)).thenReturn(Optional.empty());
 
     assertThrows(EntityNotFoundException.class, () -> marcaFacade.alterar(1L, form));
-  }
-
-  @Test
-  void naoDeveDeletarMarcaInexistente() {
-    when(marcaRepository.findById(1L)).thenReturn(Optional.empty());
-
-    assertThrows(EntityNotFoundException.class, () -> marcaFacade.deletar(1L));
   }
 
 }

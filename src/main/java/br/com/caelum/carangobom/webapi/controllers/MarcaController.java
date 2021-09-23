@@ -61,10 +61,10 @@ public class MarcaController {
 
   @DeleteMapping("/{id}")
   @Transactional
-  public ResponseEntity<Marca> deletar(@PathVariable long id) {
-    var marca = marcaFacade.deletar(id);
+  public ResponseEntity<Object> deletar(@PathVariable long id) {
+    marcaFacade.deletar(id);
 
-    return ResponseEntity.ok(marca);
+    return ResponseEntity.ok(new Object());
   }
 
 }

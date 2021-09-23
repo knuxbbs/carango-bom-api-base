@@ -53,16 +53,8 @@ public class MarcaService {
     return repository.save(marca);
   }
 
-  public Marca deletar(long id) {
-    var marcaOpt = repository.findById(id);
-
-    if (!marcaOpt.isPresent()) {
-      throw new EntityNotFoundException("Marca não encontrada: " + id);
-    }
-
+  public void deletar(long id) {
     repository.deleteById(id);
-
-    return marcaOpt.get();
   }
 
 }

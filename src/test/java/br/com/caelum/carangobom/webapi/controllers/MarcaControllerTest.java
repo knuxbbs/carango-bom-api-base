@@ -16,7 +16,6 @@ import br.com.caelum.carangobom.domain.Marca;
 import br.com.caelum.carangobom.repositories.MarcaRepository;
 import br.com.caelum.carangobom.services.MarcaService;
 import br.com.caelum.carangobom.viewmodels.MarcaForm;
-import br.com.caelum.carangobom.webapi.controllers.MarcaController;
 
 class MarcaControllerTest {
 
@@ -99,10 +98,6 @@ class MarcaControllerTest {
 
   @Test
   void deveDeletarMarcaExistente() {
-    Marca audi = new Marca(NOME_DEFAULT);
-
-    when(marcaFacade.deletar(1L)).thenReturn(audi);
-
     ResponseEntity<?> resposta = marcaController.deletar(1L);
     assertEquals(HttpStatus.OK, resposta.getStatusCode());
     verify(marcaFacade).deletar(1L);
