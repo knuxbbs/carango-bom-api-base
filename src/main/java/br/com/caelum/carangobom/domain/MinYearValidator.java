@@ -19,11 +19,7 @@ public class MinYearValidator implements ConstraintValidator<MinYearConstraint, 
       return true;
     }
 
-    if (value.getValue() >= minValue) {
-      return true;
-    }
-
-    return false;
+    return value.getValue() >= minValue;
   }
 
 }
