@@ -53,7 +53,7 @@ public class MarcaController {
 
   @PutMapping("/{id}")
   @Transactional
-  public ResponseEntity<Marca> alterar(@PathVariable Long id, @Valid @RequestBody MarcaForm form) {
+  public ResponseEntity<Marca> alterar(@PathVariable long id, @Valid @RequestBody MarcaForm form) {
     var marcaAlterada = marcaFacade.alterar(id, form);
 
     return ResponseEntity.ok(marcaAlterada);
@@ -61,7 +61,7 @@ public class MarcaController {
 
   @DeleteMapping("/{id}")
   @Transactional
-  public ResponseEntity<Marca> deletar(@PathVariable Long id) {
+  public ResponseEntity<Marca> deletar(@PathVariable long id) {
     var marca = marcaFacade.deletar(id);
 
     return ResponseEntity.ok(marca);

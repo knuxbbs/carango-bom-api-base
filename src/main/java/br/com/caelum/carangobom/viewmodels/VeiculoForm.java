@@ -9,7 +9,7 @@ import br.com.caelum.carangobom.domain.MinYearConstraint;
 
 public class VeiculoForm {
 
-  private Long marcaId;
+  private long marcaId;
 
   @NotBlank
   @Size(min = 2, message = "Deve ter {min} ou mais caracteres.")
@@ -21,11 +21,11 @@ public class VeiculoForm {
 
   private BigDecimal valor;
 
-  public Long getMarcaId() {
+  public long getMarcaId() {
     return marcaId;
   }
 
-  public void setMarcaId(Long marcaId) {
+  public void setMarcaId(long marcaId) {
     this.marcaId = marcaId;
   }
 

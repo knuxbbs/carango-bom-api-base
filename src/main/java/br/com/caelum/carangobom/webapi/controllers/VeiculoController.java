@@ -35,7 +35,7 @@ public class VeiculoController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<VeiculoView> recuperarPorId(@PathVariable Long id) {
+  public ResponseEntity<VeiculoView> recuperarPorId(@PathVariable long id) {
     var view = veiculoFacade.recuperar(id);
 
     return ResponseEntity.of(view);
@@ -54,7 +54,7 @@ public class VeiculoController {
 
   @PutMapping("/{id}")
   @Transactional
-  public ResponseEntity<VeiculoView> alterar(@PathVariable Long id,
+  public ResponseEntity<VeiculoView> alterar(@PathVariable long id,
       @RequestBody @Valid VeiculoForm form) {
     VeiculoView view = veiculoFacade.alterar(id, form);
 
@@ -63,7 +63,7 @@ public class VeiculoController {
 
   @DeleteMapping("/{id}")
   @Transactional
-  public ResponseEntity<Object> deletar(@PathVariable Long id) {
+  public ResponseEntity<Object> deletar(@PathVariable long id) {
     veiculoFacade.deletar(id);
 
     return ResponseEntity.ok(new Object());

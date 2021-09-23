@@ -30,7 +30,7 @@ public class VeiculoService {
     return veiculos.stream().map(VeiculoView::new).collect(Collectors.toList());
   }
 
-  public Optional<VeiculoView> recuperar(Long id) {
+  public Optional<VeiculoView> recuperar(long id) {
     var veiculo = veiculoRepository.findById(id);
 
     if (veiculo.isEmpty()) {
@@ -54,7 +54,7 @@ public class VeiculoService {
     return new VeiculoView(veiculo);
   }
 
-  public VeiculoView alterar(Long id, VeiculoForm form) {
+  public VeiculoView alterar(long id, VeiculoForm form) {
     var veiculoOpt = veiculoRepository.findById(id);
 
     if (veiculoOpt.isEmpty()) {
@@ -73,7 +73,7 @@ public class VeiculoService {
     return new VeiculoView(veiculo);
   }
 
-  public void deletar(Long id) {
+  public void deletar(long id) {
     veiculoRepository.deleteById(id);
   }
 

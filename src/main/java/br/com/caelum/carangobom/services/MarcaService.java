@@ -24,7 +24,7 @@ public class MarcaService {
     return repository.findAllByOrderByNome();
   }
 
-  public Optional<Marca> recuperar(Long id) {
+  public Optional<Marca> recuperar(long id) {
     return repository.findById(id);
   }
 
@@ -40,7 +40,7 @@ public class MarcaService {
     return repository.save(marca);
   }
 
-  public Marca alterar(Long id, MarcaForm form) {
+  public Marca alterar(long id, MarcaForm form) {
     var marcaOpt = repository.findById(id);
 
     if (marcaOpt.isEmpty()) {
@@ -53,7 +53,7 @@ public class MarcaService {
     return repository.save(marca);
   }
 
-  public Marca deletar(Long id) {
+  public Marca deletar(long id) {
     var marcaOpt = repository.findById(id);
 
     if (!marcaOpt.isPresent()) {
